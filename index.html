@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AI Interview Coach — practice technical interviews, get feedback, and track progress." />
+  <title>AI Interview Coach</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">AI</div>
+        <div>
+          <strong>Interview Coach</strong>
+          <span>Practice smarter</span>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <button class="nav-item active" data-view="dashboard">⌂ <span>Dashboard</span></button>
+        <button class="nav-item" data-view="interview">◉ <span>Mock Interview</span></button>
+        <button class="nav-item" data-view="history">◷ <span>History</span></button>
+        <button class="nav-item" data-view="profile">◎ <span>Profile</span></button>
+      </nav>
+
+      <div class="sidebar-tip">
+        <span class="tip-icon">✦</span>
+        <strong>Coach tip</strong>
+        <p>Keep answers structured: explain the idea, give an example, then mention trade-offs.</p>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">AI INTERVIEW COACH</p>
+          <h1 id="pageTitle">Dashboard</h1>
+        </div>
+        <div class="top-actions">
+          <button class="icon-btn" title="Notifications">⌁</button>
+          <div class="avatar" id="avatar">PH</div>
+        </div>
+      </header>
+
+      <!-- DASHBOARD -->
+      <section id="dashboardView" class="view active-view">
+        <div class="hero-card">
+          <div>
+            <span class="pill">● Ready to practice</span>
+            <h2>Turn interview practice<br><span>into interview confidence.</span></h2>
+            <p>Generate role-specific technical questions, answer by voice or text, and get instant coaching feedback.</p>
+            <button class="primary-btn" id="startInterviewBtn">Start Mock Interview <span>→</span></button>
+          </div>
+          <div class="hero-orb">
+            <div class="orb-ring ring-1"></div>
+            <div class="orb-ring ring-2"></div>
+            <div class="orb-core">✦</div>
+          </div>
+        </div>
+
+        <div class="stats-grid">
+          <article class="stat-card">
+            <div class="stat-icon purple">◎</div>
+            <div><span>Average score</span><strong id="avgScore">7.8<span>/10</span></strong></div>
+            <small class="up">↑ 12% this month</small>
+          </article>
+          <article class="stat-card">
+            <div class="stat-icon blue">◷</div>
+            <div><span>Interviews</span><strong id="interviewCount">12</strong></div>
+            <small>3 this week</small>
+          </article>
+          <article class="stat-card">
+            <div class="stat-icon green">✓</div>
+            <div><span>Questions answered</span><strong id="questionCount">58</strong></div>
+            <small>+8 this week</small>
+          </article>
+          <article class="stat-card">
+            <div class="stat-icon orange">◆</div>
+            <div><span>Best score</span><strong>9.4<span>/10</span></strong></div>
+            <small>Technical round</small>
+          </article>
+        </div>
+
+        <div class="content-grid">
+          <article class="panel progress-panel">
+            <div class="panel-head">
+              <div><span class="section-label">YOUR PROGRESS</span><h3>Skill breakdown</h3></div>
+              <button class="text-btn" data-view="history">View history →</button>
+            </div>
+            <div class="skill-row"><div><span>JavaScript</span><b>82%</b></div><div class="progress"><i style="width:82%"></i></div></div>
+            <div class="skill-row"><div><span>Data Structures</span><b>74%</b></div><div class="progress"><i style="width:74%"></i></div></div>
+            <div class="skill-row"><div><span>React</span><b>68%</b></div><div class="progress"><i style="width:68%"></i></div></div>
+            <div class="skill-row"><div><span>DBMS</span><b>61%</b></div><div class="progress"><i style="width:61%"></i></div></div>
+          </article>
+
+          <article class="panel recent-panel">
+            <div class="panel-head">
+              <div><span class="section-label">RECENT SESSION</span><h3>Technical Interview</h3></div>
+              <span class="score-badge">8.6 / 10</span>
+            </div>
+            <div class="session-meta"><span>Frontend Developer</span><span>•</span><span>8 questions</span><span>•</span><span>24 min</span></div>
+            <div class="mini-feedback">
+              <div><span class="dot good"></span><div><b>Strong communication</b><p>Clear explanations with good examples.</p></div></div>
+              <div><span class="dot warn"></span><div><b>Improve system design</b><p>Go deeper into trade-offs and scalability.</p></div></div>
+            </div>
+            <button class="secondary-btn" id="continueBtn">Review session</button>
+          </article>
+        </div>
+      </section>
+
+      <!-- INTERVIEW -->
+      <section id="interviewView" class="view">
+        <div class="setup-card" id="setupCard">
+          <div class="setup-copy">
+            <span class="section-label">NEW SESSION</span>
+            <h2>Build your interview</h2>
+            <p>Tell your coach what you're preparing for. Questions will adapt to your target role.</p>
+          </div>
+          <form id="setupForm" class="setup-form">
+            <label>Name<input id="candidateName" required placeholder="e.g. Prajwal Halaharvi" /></label>
+            <label>Branch / Degree<input id="branch" required placeholder="e.g. CSE Engineering" /></label>
+            <label>Target company<input id="company" required placeholder="e.g. Google, Infosys, Microsoft" /></label>
+            <label>Target role<select id="role">
+              <option>Frontend Developer</option>
+              <option>Backend Developer</option>
+              <option>Full Stack Developer</option>
+              <option>Data Analyst</option>
+              <option>Machine Learning Engineer</option>
+              <option>Software Engineer</option>
+            </select></label>
+            <label>Difficulty<select id="difficulty">
+              <option>Mixed</option><option>Easy</option><option>Medium</option><option>Hard</option>
+            </select></label>
+            <label>Questions<select id="questionTotal">
+              <option value="5">5 questions</option><option value="8" selected>8 questions</option><option value="10">10 questions</option>
+            </select></label>
+            <button class="primary-btn full" type="submit">Generate Interview <span>✦</span></button>
+          </form>
+        </div>
+
+        <div class="interview-card hidden" id="interviewCard">
+          <div class="interview-top">
+            <div>
+              <span class="section-label" id="interviewRoleLabel">TECHNICAL INTERVIEW</span>
+              <h2 id="questionHeading">Question 1</h2>
+            </div>
+            <div class="timer" id="timer">02:00</div>
+          </div>
+          <div class="question-box">
+            <span class="question-number" id="questionNumber">01</span>
+            <p id="questionText"></p>
+            <div class="question-tags" id="questionTags"></div>
+          </div>
+          <div class="answer-area">
+            <div class="answer-head">
+              <label>Your answer</label>
+              <div class="answer-modes">
+                <button class="mode-btn active" id="textMode">⌨ Type</button>
+                <button class="mode-btn" id="voiceMode">◉ Speak</button>
+              </div>
+            </div>
+            <textarea id="answerInput" placeholder="Explain your approach clearly. Include examples or trade-offs where relevant..."></textarea>
+            <div class="voice-status hidden" id="voiceStatus">Listening… speak your answer now.</div>
+          </div>
+          <div class="interview-actions">
+            <button class="secondary-btn" id="skipBtn">Skip question</button>
+            <button class="primary-btn" id="submitAnswerBtn">Submit answer <span>→</span></button>
+          </div>
+        </div>
+
+        <div class="feedback-card hidden" id="feedbackCard">
+          <div class="feedback-header">
+            <div><span class="section-label">AI COACH FEEDBACK</span><h2>Here's how you did</h2></div>
+            <div class="big-score" id="answerScore">8.5<span>/10</span></div>
+          </div>
+          <div class="feedback-grid">
+            <div class="feedback-box strengths"><h4>✓ Strengths</h4><ul id="strengthsList"></ul></div>
+            <div class="feedback-box weaknesses"><h4>△ Improve</h4><ul id="weaknessList"></ul></div>
+          </div>
+          <div class="suggestion"><strong>Coach suggestion</strong><p id="suggestionText"></p></div>
+          <button class="primary-btn full" id="nextQuestionBtn">Continue to next question <span>→</span></button>
+        </div>
+      </section>
+
+      <!-- HISTORY -->
+      <section id="historyView" class="view">
+        <div class="page-intro"><span class="section-label">PERFORMANCE</span><h2>Interview history</h2><p>Review previous sessions and identify patterns in your preparation.</p></div>
+        <div class="panel table-panel">
+          <div class="history-row history-header"><span>Session</span><span>Role</span><span>Questions</span><span>Score</span><span>Date</span></div>
+          <div id="historyRows"></div>
+        </div>
+      </section>
+
+      <!-- PROFILE -->
+      <section id="profileView" class="view">
+        <div class="page-intro"><span class="section-label">YOUR PROFILE</span><h2>Candidate profile</h2><p>These details are used to personalize interview questions.</p></div>
+        <div class="panel profile-panel">
+          <div class="profile-avatar" id="profileAvatar">PH</div>
+          <div class="profile-fields">
+            <label>Full name<input id="profileName" value="Prajwal Halaharvi"></label>
+            <label>Branch<input id="profileBranch" value="CSE Engineering"></label>
+            <label>Preferred role<input id="profileRole" value="Frontend Developer"></label>
+            <label>Target company<input id="profileCompany" value="Microsoft"></label>
+            <button class="primary-btn" id="saveProfile">Save profile</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <div class="toast" id="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>

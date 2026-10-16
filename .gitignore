@@ -1,0 +1,21 @@
+# Operating System Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor and IDE Files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Node / Package managers (if added later)
+node_modules/
+package-lock.json
+
+# Environment variables & secrets
+.env
+.env*.local
+
+# Logs
+*.log
